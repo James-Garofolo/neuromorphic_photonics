@@ -1,3 +1,6 @@
+# file used to visualize signal behaviors of ideal spiking neural networks
+
+
 # import libraries
 import math
 import numpy as np
