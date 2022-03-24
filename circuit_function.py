@@ -1,6 +1,6 @@
-from genericpath import sameopenfile
 import numpy as np
 import math
+import random
 import matplotlib.pyplot as plt
 
 sample = True
@@ -12,11 +12,9 @@ latch_r = 1 # 1 Ohm
 drain = False
 drain_r = 1 # 1 Ohm
 
-t_step = 0.0000000001
-time = np.arange(0, 0.0000001, t_step)
-i_in = []
-for t in time:
-    i_in.append(0.5 + 0.1*math.cos(2*math.pi*8000000000*t))
+t_step = 0.000000000001
+time = np.arange(0, 0.000000005, t_step)
+i_in = np.ones_like(time) * random.randint(0, 10) * 0.1
 sample_v = np.zeros_like(time)
 hold_v = np.zeros_like(time)
 
@@ -40,9 +38,12 @@ for t in range(1, len(time)):
 
     elif drain:
         hold_v[t] = hold_v[t-1] # stay constant
-        sample_v[t] = sample_v[t-1] - (sample_v[t-1]*t_step)/(drain_r*sample_c) # drain sample cap
+        sample_v[t] = sample_v[t-1] - ((sample_v[t-1]+1)*t_step)/(drain_r*sample_c) # drain sample cap
 
         if sample_v[t] < 0.000001: # if sample cap is about at 0V
+            i_in[t] = random.randint(0, 10) * 0.1
+            for a in range(t+1, len(time)):
+                i_in[a] = i_in[t]
             drain = False
             sample = True
 
