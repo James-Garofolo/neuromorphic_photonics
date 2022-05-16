@@ -19,7 +19,7 @@ sample_v = np.zeros_like(time)
 hold_v = np.zeros_like(time)
 
 for t in range(1, len(time)):
-    i_in[t] += 0.1*math.sin(2*math.pi*5000000000*time[t])
+    #i_in[t] += 0.1*math.sin(2*math.pi*5000000000*time[t])
     if sample:
         hold_v[t] = hold_v[t-1] # stay constant
         sample_v[t] = sample_v[t-1] + (i_in[t] * t_step)/sample_c # time average the current
@@ -39,7 +39,7 @@ for t in range(1, len(time)):
 
     elif drain:
         hold_v[t] = hold_v[t-1] # stay constant
-        sample_v[t] = sample_v[t-1] - ((sample_v[t-1]+1)*t_step)/(drain_r*sample_c) # drain sample cap
+        sample_v[t] = sample_v[t-1] - ((sample_v[t-1])*t_step)/(drain_r*sample_c) # drain sample cap
 
         if sample_v[t] < 0.000001: # if sample cap is about at 0V
             i_in[t] = random.randint(0, 10) * 0.1 
