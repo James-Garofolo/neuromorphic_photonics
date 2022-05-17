@@ -58,7 +58,7 @@ for d in data: # make all of the arrays the same size by appending zeros to test
         for arr in d:
             arr.append(0)
 
-    a = np.array(d).T # create a numpy array for data and scale it to transform it from counts to volts/amps
+    a = np.array(d).T # create a numpy array for data
 
     np.savetxt(os.getcwd() + "/data/arduino_test" + str(i) + ".csv", a, delimiter=",")
 
