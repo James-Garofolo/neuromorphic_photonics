@@ -9,11 +9,11 @@ i_in = []
 v_latched = []
 i_out = []
 
-arr = np.loadtxt(os.getcwd() + "/data/0.47uF latch.csv", delimiter=",").T
+arr = np.loadtxt(os.getcwd() + "/data/2.2uF latch.csv", delimiter=",").T
 start = arr[0,0]
 for t in range(len(arr[0])):
     arr[0,t] -= start
-    if (arr[0,t] > 30) and (arr[0,t] < 40):
+    if (arr[0,t] > 0) and (arr[0,t] < 10):
         time.append(arr[0,t])
         v_sample.append(arr[1,t])
         i_in.append(arr[2,t])
